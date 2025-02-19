@@ -13,32 +13,33 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
+	isRunning = false;
+
 	if (SDL_Init(SDL_INIT_VIDEO) == 1) {
 
-		std::cout << "Subsystems initialized\n";
+		std::cout << "Subsystems initializat\n";
 
 		window = SDL_CreateWindow(title, width, height, flags);
-		if (window) {
+		if (!window) {
 
-			std::cout << "Window created\n";
+			std::cout << "Crapa Windowu\n";
+			return;
 		}
-		else
-			std::cout << "Crapa fereastra\n";
+		std::cout << "Merge Windowu\n";
 
 		renderer = SDL_CreateRenderer(window, NULL);
-		if (renderer) {
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-			std::cout << "Renderer created\n";
+		if (!renderer) {
+			
+			std::cout << "Crapa rendereru\n";
+			return;
 		}
-		else
-			std::cout << "Crapa renderu\n";
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		std::cout << "Merge rendereru\n";
 
 		isRunning = true;
 	}
-	else{
+	else
 		std::cout << "Crapa initu\n";
-		isRunning = false;
-	}
 }
 
 void Game::handleEvents() {
@@ -72,5 +73,5 @@ void Game::clean() {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
-	std::cout << "Game cleaned\n";
+	std::cout << "Joc curatat\n";
 }
