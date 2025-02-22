@@ -6,6 +6,7 @@
 #include "SDL3/SDl.h"
 #include "SDL_image.h"
 
+#include <chrono>
 #include <stdio.h>
 #include <iostream>
 
