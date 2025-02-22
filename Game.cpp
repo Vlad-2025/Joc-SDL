@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 SDL_Texture* playerTex;
+SDL_FRect srcR, destR;
 
 Game::Game() {
 	cnt = 0;
@@ -51,6 +52,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		std::cout << "Crapa tempSurfaceu\n";
 		return;
 	}
+	
 	playerTex = SDL_CreateTextureFromSurface(renderer, tempSurface);
 	SDL_DestroySurface(tempSurface);
 }
@@ -73,13 +75,15 @@ void Game::handleEvents() {
 void Game::update() {
 
 	cnt++;
+	destR.h = 64;
+	destR.w = 64;
 	std::cout << cnt << std::endl;
 }
 
 void Game::render() {
 
 	SDL_RenderClear(renderer);
-	SDL_RenderTexture(renderer, playerTex, NULL, NULL);
+	SDL_RenderTexture(renderer, playerTex, NULL, &destR);
 	SDL_RenderPresent(renderer);
 }
 

@@ -72,19 +72,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\SDL MASTER\SDL3_image-3.2.0\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\SDL MASTER\SDL3_image-3.2.0\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\SDL MASTER\SDL3_image-3.2.0\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\SDL MASTER\SDL3_image-3.2.0\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -97,7 +97,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\SDL MASTER\SDL3_image-3.2.0\lib\x64;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL3_image.lib;SDL3_image.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,7 +116,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\SDL MASTER\SDL3_image-3.2.0\lib\x64;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL3_image.lib;SDL3_image.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,8 +131,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;E:\SDL MASTER\SDL3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3.lib;SDL3_test.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\SDL MASTER\SDL3_image-3.2.0\lib\x64;E:\SDL MASTER\SDL3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;SDL3_test.lib;%(AdditionalDependencies);SDL3_image.lib;SDL3_image.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,7 +150,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\SDL MASTER\SDL3_image-3.2.0\include\SDL3_image;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\SDL MASTER\SDL3_image-3.2.0\lib\x64;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL3_image.lib;SDL3_image.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
