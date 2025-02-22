@@ -1,6 +1,10 @@
 #include "Game.hpp"
 
+SDL_Texture* playerTex;
+
 Game::Game() {
+	cnt = 0;
+	isRunning = false;
 }
 Game::~Game() {
 }
@@ -15,7 +19,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	isRunning = false;
 
-	if (SDL_Init(SDL_INIT_VIDEO) == 1) {
+	if (SDL_Init(SDL_INIT_VIDEO)) {
 
 		std::cout << "Subsystems initializat\n";
 
@@ -40,6 +44,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 	else
 		std::cout << "Crapa initu\n";
+
+
+	SDL_Surface* tempSurface = IMG_Load("assets/vadmirBasic.png");
+	if (!tempSurface) {
+		std::cout << "Crapa tempSurfaceu\n";
+		return;
+	}
+	playerTex = SDL_CreateTextureFromSurface(renderer, tempSurface);
+	SDL_DestroySurface(tempSurface);
 }
 
 void Game::handleEvents() {
@@ -59,12 +72,14 @@ void Game::handleEvents() {
 
 void Game::update() {
 
-
+	cnt++;
+	std::cout << cnt << std::endl;
 }
 
 void Game::render() {
 
 	SDL_RenderClear(renderer);
+	SDL_RenderTexture(renderer, playerTex, NULL, NULL);
 	SDL_RenderPresent(renderer);
 }
 

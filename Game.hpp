@@ -4,6 +4,7 @@
 #define SDL_MAIN_HANDLED
 
 #include "SDL3/SDl.h"
+#include "SDL_image.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -15,6 +16,8 @@ private:
 	bool isRunning;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+
+	int cnt;
 
 public:
 
