@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "TextureManager.hpp"
 
 SDL_Texture* playerTex;
 SDL_FRect srcR, destR;
@@ -46,15 +47,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else
 		std::cout << "Crapa initu\n";
 
-
-	SDL_Surface* tempSurface = IMG_Load("assets/vadmirBasic.png");
-	if (!tempSurface) {
-		std::cout << "Crapa tempSurfaceu\n";
-		return;
-	}
-	
-	playerTex = SDL_CreateTextureFromSurface(renderer, tempSurface);
-	SDL_DestroySurface(tempSurface);
+	playerTex = TextureManager::LoadTexture("assets/vadmirBasic.png", renderer);
 }
 
 void Game::handleEvents() {
