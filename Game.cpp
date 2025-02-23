@@ -3,6 +3,7 @@
 #include "GameObject.hpp"
 
 GameObject* player;
+GameObject* inamic;
 
 Game::Game() {
 	cnt = 0;
@@ -48,6 +49,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		std::cout << "Crapa initu\n";
 
 	player = new GameObject("assets/vadmirBasic.png", renderer, 0, 0);
+	inamic = new GameObject("assets/retep.png", renderer, 32, 32);
 }
 
 void Game::handleEvents() {
@@ -68,14 +70,18 @@ void Game::handleEvents() {
 void Game::update() {
 
 	cnt++;
-	std::cout << cnt << std::endl;
+	std::cout << cnt << "\t";
+	if (cnt % 10 == 0)
+		std::cout << std::endl;
 	player->update();
+	inamic->update();
 }
 
 void Game::render() {
 
 	SDL_RenderClear(renderer);
 	player->render();
+	inamic->render();
 	SDL_RenderPresent(renderer);
 }
 

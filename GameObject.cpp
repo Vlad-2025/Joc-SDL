@@ -46,6 +46,9 @@ void GameObject::update() {
 	destRect.w = 64;
 	destRect.x = xpos;
 	destRect.y = ypos;
+
+	xpos++;
+	ypos++;
 	
 }
 
