@@ -6,6 +6,6 @@ private:
 
 public:
 
-	static SDL_Texture* LoadTexture(const char* fileNamea, SDL_Renderer* ren);
+	static SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* ren);
 
 };

@@ -1,8 +1,8 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
+#include "GameObject.hpp"
 
-SDL_Texture* playerTex;
-SDL_FRect srcR, destR;
+GameObject* player;
 
 Game::Game() {
 	cnt = 0;
@@ -47,7 +47,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else
 		std::cout << "Crapa initu\n";
 
-	playerTex = TextureManager::LoadTexture("assets/vadmirBasic.png", renderer);
+	player = new GameObject("assets/vadmirBasic.png", renderer, 0, 0);
 }
 
 void Game::handleEvents() {
@@ -68,16 +68,14 @@ void Game::handleEvents() {
 void Game::update() {
 
 	cnt++;
-	destR.h = 64;
-	destR.w = 64;
-	destR.x = cnt;
 	std::cout << cnt << std::endl;
+	player->update();
 }
 
 void Game::render() {
 
 	SDL_RenderClear(renderer);
-	SDL_RenderTexture(renderer, playerTex, NULL, &destR);
+	player->render();
 	SDL_RenderPresent(renderer);
 }
 
@@ -86,5 +84,6 @@ void Game::clean() {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
+	delete player;
 	std::cout << "Joc curatat\n";
 }
