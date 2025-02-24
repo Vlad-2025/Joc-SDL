@@ -1,9 +1,11 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 #include "GameObject.hpp"
+#include "Map.hpp"
 
 GameObject* player;
 GameObject* inamic;
+Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -54,6 +56,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	player = new GameObject("assets/vadmirBasic.png", 0, 0);
 	inamic = new GameObject("assets/retep.png", 32, 32);
+	map = new Map();
 }
 
 void Game::handleEvents() {
@@ -84,6 +87,7 @@ void Game::update() {
 void Game::render() {
 
 	SDL_RenderClear(renderer);
+	map->drawMap();
 	player->render();
 	inamic->render();
 	SDL_RenderPresent(renderer);
@@ -95,5 +99,6 @@ void Game::clean() {
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	delete player;
+	delete inamic;
 	std::cout << "Joc curatat\n";
 }

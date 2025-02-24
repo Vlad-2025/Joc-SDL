@@ -3,7 +3,7 @@
 #define Game_hpp
 #define SDL_MAIN_HANDLED
 
-#include "SDL3/SDl.h"
+#include "SDL3/SDL.h"
 #include "SDL_image.h"
 
 #include <chrono>
