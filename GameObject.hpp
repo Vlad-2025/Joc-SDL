@@ -8,12 +8,10 @@ private:
 
 	SDL_Texture* objTexture;
 	SDL_FRect srcRect, destRect;
-	SDL_Renderer* renderer;
-
 
 public:
 
-	GameObject(const char* textureSheet, SDL_Renderer* ren, float x, float y);
+	GameObject(const char* textureSheet, float x, float y);
 	~GameObject();
 
 	void update();

@@ -16,8 +16,6 @@ private:
 
 	bool isRunning;
 	SDL_Window* window;
-	SDL_Renderer* renderer;
-
 	int cnt;
 
 public:
@@ -35,6 +33,8 @@ public:
 	bool running() const {
 		return isRunning;
 	}
+
+	static SDL_Renderer* renderer;
 };
 
 #endif // !Game_hpp

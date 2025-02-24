@@ -1,21 +1,13 @@
 #include "GameObject.hpp"
 #include "TextureManager.hpp"
 
-GameObject::GameObject(const char* textureSheet, SDL_Renderer* ren, float x, float y) {
+GameObject::GameObject(const char* textureSheet, float x, float y) {
 
 	xpos = x;
 	ypos = y;
 
-	if (ren)
-		renderer = ren;
-	else{
-		std::cout << "Crapa atribuire \"ren\" la \"renderer\" in \"GameObject.cpp\"\n";
-		renderer = nullptr;
-	}
-
-
-	if (textureSheet != 0 && ren){
-		objTexture = TextureManager::LoadTexture(textureSheet, ren);
+	if (textureSheet != 0){
+		objTexture = TextureManager::LoadTexture(textureSheet);
 		if (!objTexture) {
 			std::cout << "Crapa atribuire \"LoadTexture(...)\" la \"objTexture\" in \"GameObject.cpp\"\n";
 			objTexture = nullptr;
@@ -56,5 +48,5 @@ void GameObject::render() {
 
 	//	problema la &srcRect (unde e NULL)
 	
-	SDL_RenderTexture(renderer, objTexture, &srcRect, &destRect);
+	SDL_RenderTexture(Game::renderer, objTexture, &srcRect, &destRect);
 }

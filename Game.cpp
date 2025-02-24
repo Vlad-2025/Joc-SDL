@@ -5,7 +5,11 @@
 GameObject* player;
 GameObject* inamic;
 
+SDL_Renderer* Game::renderer = nullptr;
+
 Game::Game() {
+	renderer = nullptr;
+	window = nullptr;
 	cnt = 0;
 	isRunning = false;
 }
