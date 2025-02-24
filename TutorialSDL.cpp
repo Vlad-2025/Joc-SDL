@@ -7,11 +7,23 @@ int main(int argc, const char * argv[]){
 
 	using clock = std::chrono::steady_clock;
 
-	using frames = std::chrono::duration<int, std::ratio<1, 60>>;
+	using frames = std::chrono::duration<int, std::ratio<1, 120>>;
 
 	game = new Game();
 
 	game->init("Vadmir", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+
+	/*
+	
+		- trebuie gasita o solutie definitiva pentru frame-rate si inconsistentele la diferite frame-rateuri
+		- solutia implementata este buna pentru consistenta intre frame-rateuri diferite, dar la valori mai mici 
+			de 120fps se vede tearing sau ce o fi
+	
+	*/
+
+	const double dt = 1.0 / 60.0;
+	double accumulator = 0.0;
+	auto currentTime = clock::now();
 
 	while (game->running()) {
 
@@ -32,16 +44,24 @@ int main(int argc, const char * argv[]){
 
 		*/
 
-		auto start = clock::now();
+		auto newTime = clock::now();
 
-		game->handleEvents();
-		game->update();
+		std::chrono::duration<double> frameTime = newTime - currentTime;
+		currentTime = newTime;
+		accumulator += frameTime.count();
+
+		while (accumulator >= dt) {
+			// nu stiu daca merge handleEvents() aici
+			game->handleEvents();
+			game->update();
+			accumulator -= dt;
+		}
+
 		game->render();
 
 		auto finish = clock::now();
-
-		auto frameTime = finish - start;
-		auto delay = frames(1) - frameTime;
+		auto frameDuration = finish - newTime;
+		auto delay = frames(1) - frameDuration;
 
 		// pentru "0s"
 		using namespace std::chrono_literals;
