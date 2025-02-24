@@ -52,8 +52,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else
 		std::cout << "Crapa initu\n";
 
-	player = new GameObject("assets/vadmirBasic.png", renderer, 0, 0);
-	inamic = new GameObject("assets/retep.png", renderer, 32, 32);
+	player = new GameObject("assets/vadmirBasic.png", 0, 0);
+	inamic = new GameObject("assets/retep.png", 32, 32);
 }
 
 void Game::handleEvents() {
