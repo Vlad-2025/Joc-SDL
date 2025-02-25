@@ -59,8 +59,8 @@ void Map::drawMap() {
 
 			tipTeren = map[row][col];
 
-			dest.x = col * 32;
-			dest.y = row * 32;
+			dest.x = col * 32.f;
+			dest.y = row * 32.f;
 
 			switch (tipTeren)
 			{

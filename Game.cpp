@@ -2,12 +2,17 @@
 #include "TextureManager.hpp"
 #include "GameObject.hpp"
 #include "Map.hpp"
+#include "ECS.hpp"
+#include "Components.hpp"
 
 GameObject* player;
 GameObject* inamic;
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+
+Manager manager;
+auto& newPlayer(manager.addEntity());
 
 Game::Game() {
 	renderer = nullptr;
@@ -57,6 +62,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player = new GameObject("assets/vadmirBasic.png", 0, 0);
 	inamic = new GameObject("assets/retep.png", 32, 32);
 	map = new Map();
+
+	newPlayer.addComponent<PositionComponent>();
 }
 
 void Game::handleEvents() {
@@ -78,10 +85,12 @@ void Game::update() {
 
 	cnt++;
 	std::cout << cnt << "\t";
-	if (cnt % 10 == 0)
-		std::cout << std::endl;
+
 	player->update();
 	inamic->update();
+	manager.update();
+	std::cout << newPlayer.getComponent<PositionComponent>().x() << ", "
+			  << newPlayer.getComponent<PositionComponent>().y() << std::endl;
 }
 
 void Game::render() {

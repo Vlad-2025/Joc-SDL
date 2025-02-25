@@ -162,6 +162,8 @@
     <ClCompile Include="TutorialSDL.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components.hpp" />
+    <ClInclude Include="ECS.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="Map.hpp" />
