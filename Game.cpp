@@ -82,7 +82,7 @@ void Game::update() {
 
 	cnt++;
 	std::cout << cnt << "\t";
-	//manager.refresh();
+	manager.refresh();
 	manager.update();
 
 	//if (player.getComponent<PositionComponent>().x() > 100) {
