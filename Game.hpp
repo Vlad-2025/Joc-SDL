@@ -35,6 +35,7 @@ public:
 	}
 
 	static SDL_Renderer* renderer;
+	static SDL_Event event;
 };
 
 #endif // !Game_hpp

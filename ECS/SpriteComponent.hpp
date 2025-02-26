@@ -7,7 +7,7 @@ class SpriteComponent : public Component{
 
 private:
 
-	PositionComponent* position;
+	TransformComponent* transform;
 	SDL_Texture* texture;
 	SDL_FRect srcRect, destRect;
 
@@ -26,7 +26,7 @@ public:
 
 	void init() override {
 
-		position = &entity->getComponent<PositionComponent>();
+		transform = &entity->getComponent<TransformComponent>();
 
 		srcRect.x = srcRect.y = 0;
 		srcRect.w = srcRect.h = 832;	// TERBUIE NEAPARAT REPARAT
@@ -35,8 +35,8 @@ public:
 
 	void update() override {
 
-		destRect.x = position->x();
-		destRect.y = position->y();
+		destRect.x = transform->position.x;
+		destRect.y = transform->position.y;
 	}
 
 	void draw() override {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ECS.hpp"
-#include "PositionComponent.hpp"
+#include "TransformComponent.hpp"
 #include "SpriteComponent.hpp"
 
 

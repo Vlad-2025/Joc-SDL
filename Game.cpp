@@ -2,10 +2,13 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 #include "ECS/Components.hpp"
+#include "Vector2D.hpp"
 
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+
+SDL_Event Game::event;
 
 Manager manager;
 auto& player(manager.addEntity());
@@ -31,41 +34,39 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 
-		std::cout << "Subsystems initializat\n";
+		std::cout << "Subsisteme VIDEO initializate\n";
 
 		window = SDL_CreateWindow(title, width, height, flags);
 		if (!window) {
 
-			std::cout << "Crapa Windowu\n";
+			std::cout << "Crapa Windowul\n";
 			return;
 		}
-		std::cout << "Merge Windowu\n";
+		std::cout << "Merge Windowul\n";
 
 		renderer = SDL_CreateRenderer(window, NULL);
 		if (!renderer) {
 			
-			std::cout << "Crapa rendereru\n";
+			std::cout << "Crapa rendererul\n";
 			return;
 		}
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		std::cout << "Merge rendereru\n";
+		std::cout << "Merge rendererul\n";
 
 		isRunning = true;
 	}
 	else
-		std::cout << "Crapa initu\n";
-
-
+		std::cout << "Crapa initul\n";
 
 	map = new Map();
 
-	player.addComponent<PositionComponent>();
+	player.addComponent<TransformComponent>();
 	player.addComponent<SpriteComponent>("assets/vadmirBasic.png");
 }
 
 void Game::handleEvents() {
 
-	SDL_Event event;
+	
 	SDL_PollEvent(&event);
 
 	switch (event.type) {
@@ -82,13 +83,16 @@ void Game::update() {
 
 	cnt++;
 	std::cout << cnt << "\t";
+	if (!(cnt % 10))
+		std::cout << std::endl;
+
 	manager.refresh();
 	manager.update();
 
-	//if (player.getComponent<PositionComponent>().x() > 100) {
-	//	//	std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-	//	player.getComponent<SpriteComponent>().setTex("assets/retep.png");
-	//}
+	if (player.getComponent<TransformComponent>().position.y > 100) {
+		//	std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+		player.getComponent<SpriteComponent>().setTex("assets/retep.png");
+	}
 }
 
 void Game::render() {
