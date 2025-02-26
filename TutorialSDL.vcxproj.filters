@@ -44,10 +44,16 @@
     <ClInclude Include="Map.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ECS.hpp">
+    <ClInclude Include="ECS\ECS.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components.hpp">
+    <ClInclude Include="ECS\Components.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\SpriteComponent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\PositionComponent.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

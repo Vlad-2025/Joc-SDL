@@ -1,18 +1,14 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
-#include "GameObject.hpp"
 #include "Map.hpp"
-#include "ECS.hpp"
-#include "Components.hpp"
+#include "ECS/Components.hpp"
 
-GameObject* player;
-GameObject* inamic;
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 
 Manager manager;
-auto& newPlayer(manager.addEntity());
+auto& player(manager.addEntity());
 
 Game::Game() {
 	renderer = nullptr;
@@ -59,11 +55,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else
 		std::cout << "Crapa initu\n";
 
-	player = new GameObject("assets/vadmirBasic.png", 0, 0);
-	inamic = new GameObject("assets/retep.png", 32, 32);
+
+
 	map = new Map();
 
-	newPlayer.addComponent<PositionComponent>();
+	player.addComponent<PositionComponent>();
+	player.addComponent<SpriteComponent>("assets/vadmirBasic.png");
 }
 
 void Game::handleEvents() {
@@ -85,20 +82,21 @@ void Game::update() {
 
 	cnt++;
 	std::cout << cnt << "\t";
-
-	player->update();
-	inamic->update();
+	//manager.refresh();
 	manager.update();
-	std::cout << newPlayer.getComponent<PositionComponent>().x() << ", "
-			  << newPlayer.getComponent<PositionComponent>().y() << std::endl;
+
+	//if (player.getComponent<PositionComponent>().x() > 100) {
+	//	//	std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+	//	player.getComponent<SpriteComponent>().setTex("assets/retep.png");
+	//}
 }
 
 void Game::render() {
 
 	SDL_RenderClear(renderer);
+
 	map->drawMap();
-	player->render();
-	inamic->render();
+	manager.draw();
 	SDL_RenderPresent(renderer);
 }
 
@@ -107,7 +105,5 @@ void Game::clean() {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
-	delete player;
-	delete inamic;
 	std::cout << "Joc curatat\n";
 }
