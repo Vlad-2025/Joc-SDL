@@ -4,6 +4,7 @@
 #include "ECS/Components.hpp"
 #include "Vector2D.hpp"
 #include "ECS/KeyBoardController.hpp"
+#include "Collision.hpp"
 
 Map* map;
 
@@ -13,6 +14,7 @@ SDL_Event Game::event;
 
 Manager manager;
 auto& player(manager.addEntity());
+auto& wall(manager.addEntity());
 
 Game::Game() {
 	renderer = nullptr;
@@ -61,9 +63,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	map = new Map();
 
-	player.addComponent<TransformComponent>();
-	player.addComponent<SpriteComponent>("assets/vadmirBasic.png");
+	player.addComponent<TransformComponent>(2);
+	player.addComponent<SpriteComponent>("assets/vadmirBasic1.png");
 	player.addComponent<KeyboardController>();
+	player.addComponent<ColliderComponent>("player");
+
+	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+	wall.addComponent<SpriteComponent>("assets/pamant100.png");
+	wall.addComponent<ColliderComponent>("wall");
 }
 
 void Game::handleEvents() {
@@ -90,7 +97,9 @@ void Game::update() {
 	manager.refresh();
 	manager.update();
 
-	//std::cout << player.getComponent<TransformComponent>().position << " ";
+	if (Collision::AABB(player.getComponent<ColliderComponent>().collider, wall.getComponent<ColliderComponent>().collider)) {
+		//	functioneaza dar n-am ce face
+	}
 }
 
 void Game::render() {

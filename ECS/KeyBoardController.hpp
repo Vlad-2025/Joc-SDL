@@ -24,6 +24,8 @@ public:
 
 	void update() override {
 
+		// trebuie schimbata tehnica de input la scancode
+
 		if (Game::event.type == SDL_EVENT_KEY_DOWN) {
 			
 			switch (Game::event.key.key) {

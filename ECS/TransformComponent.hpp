@@ -9,8 +9,12 @@ public:
 
 	Vector2D position;
 	Vector2D velocity;
-
 	int speed = 2;
+
+	//	pentru coliziuni
+	int height = 64;
+	int width = 64;
+	int scale = 1;
 
 
 	TransformComponent() {
@@ -19,10 +23,26 @@ public:
 		position.y = 0.0;
 	}
 
+	TransformComponent(int _scale) {
+
+		position.x = 0.0;
+		position.y = 0.0;
+		scale = _scale;
+	}
+
 	TransformComponent(float x, float y) {
 
 		position.x = x;
 		position.y = y;
+	}
+
+	TransformComponent(float x, float y, int h, int w, int _scale) {
+
+		position.x = x;
+		position.y = y;
+		height = h;
+		width = w;
+		scale = _scale;
 	}
 
 	void init() override {
