@@ -10,3 +10,9 @@ bool Collision::AABB(const SDL_FRect& recA, const SDL_FRect& recB) {
 			recA.y + recA.h >= recB.y &&
 			recB.y + recB.h >= recA.y;
 }
+
+/*
+
+	return SDL_HasIntersection(&recA, &recB);
+
+*/

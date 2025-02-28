@@ -35,6 +35,9 @@ public:
 
 		collider.x = transform->position.x;
 		collider.y = transform->position.y;
+
+		//	poate fi folosit static_cast<>
+
 		collider.w = transform->width * (1.0f * transform->scale);
 		collider.h = transform->height * (1.0f * transform->scale);
 	}

@@ -47,6 +47,8 @@ public:
 		destRect.x = transform->position.x;
 		destRect.y = transform->position.y;
 
+		//	poate fi folosit static_cast<>
+
 		destRect.w = transform->width * (1.0f * transform->scale);
 		destRect.h = transform->height * (1.0f * transform->scale);
 	}

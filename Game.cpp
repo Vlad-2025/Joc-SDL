@@ -63,8 +63,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	map = new Map();
 
-	player.addComponent<TransformComponent>(2);
-	player.addComponent<SpriteComponent>("assets/vadmirBasic1.png");
+	player.addComponent<TransformComponent>(1);
+	player.addComponent<SpriteComponent>("assets/retep1.png");
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 
@@ -98,7 +98,9 @@ void Game::update() {
 	manager.update();
 
 	if (Collision::AABB(player.getComponent<ColliderComponent>().collider, wall.getComponent<ColliderComponent>().collider)) {
-		//	functioneaza dar n-am ce face
+		//	std::cout << "Bonk ";
+
+		player.getComponent<TransformComponent>().velocity * -1;
 	}
 }
 
