@@ -90,7 +90,7 @@ void Game::update() {
 	manager.refresh();
 	manager.update();
 
-	std::cout << player.getComponent<TransformComponent>().position << " ";
+	//std::cout << player.getComponent<TransformComponent>().position << " ";
 }
 
 void Game::render() {

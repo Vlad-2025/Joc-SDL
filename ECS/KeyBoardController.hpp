@@ -49,9 +49,9 @@ public:
 			}
 		}
 
-		if (Game::event.type == SDL_EVENT_KEY_DOWN) {
+		if (Game::event.type == SDL_EVENT_KEY_UP) {
 		
-			switch (Game::event.key.type) {
+			switch (Game::event.key.key) {
 
 			case SDLK_W:
 				transform->velocity.y = 0;
