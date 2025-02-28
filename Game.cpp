@@ -3,6 +3,7 @@
 #include "Map.hpp"
 #include "ECS/Components.hpp"
 #include "Vector2D.hpp"
+#include "ECS/KeyBoardController.hpp"
 
 Map* map;
 
@@ -62,11 +63,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	player.addComponent<TransformComponent>();
 	player.addComponent<SpriteComponent>("assets/vadmirBasic.png");
+	player.addComponent<KeyboardController>();
 }
 
 void Game::handleEvents() {
 
-	
 	SDL_PollEvent(&event);
 
 	switch (event.type) {
@@ -81,18 +82,15 @@ void Game::handleEvents() {
 
 void Game::update() {
 
-	cnt++;
+	/*cnt++;
 	std::cout << cnt << "\t";
 	if (!(cnt % 10))
-		std::cout << std::endl;
+		std::cout << std::endl;*/
 
 	manager.refresh();
 	manager.update();
 
-	if (player.getComponent<TransformComponent>().position.y > 100) {
-		//	std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-		player.getComponent<SpriteComponent>().setTex("assets/retep.png");
-	}
+	std::cout << player.getComponent<TransformComponent>().position << " ";
 }
 
 void Game::render() {

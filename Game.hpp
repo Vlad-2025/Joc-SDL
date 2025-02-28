@@ -1,4 +1,4 @@
-#ifndef Game_hpp
+#pragma once 
 
 #define Game_hpp
 #define SDL_MAIN_HANDLED
@@ -37,5 +37,3 @@ public:
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 };
-
-#endif // !Game_hpp
