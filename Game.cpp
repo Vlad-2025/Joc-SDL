@@ -134,5 +134,6 @@ void Game::addTile(int id, int x, int y) {
 
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, 32, 32, id);
-	
+
+
 }
