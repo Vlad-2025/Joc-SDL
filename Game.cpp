@@ -68,11 +68,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	map = new Map();
 
-	tile0.addComponent<TileComponent>(200, 200, 32, 32, 0);
-	tile1.addComponent<TileComponent>(250, 250, 32, 32, 1);
-	tile2.addComponent<TileComponent>(150, 150, 32, 32, 2);
-	tile1.addComponent<ColliderComponent>("dirt");
-	tile2.addComponent<ColliderComponent>("grass");
+	Map::loadMap("assets/p16x16.map", 32, 32);
 
 	player.addComponent<TransformComponent>(1);
 	player.addComponent<SpriteComponent>("assets/retep1.png");
@@ -108,6 +104,8 @@ void Game::update() {
 	manager.refresh();
 	manager.update();
 
+
+	//	verificare coliziuni dintre player si obiecte de care se poate lovi dintr-un vector
 	for(auto& i : colliders){
 		Collision::AABB(player.getComponent<ColliderComponent>(), *i);
 	}
@@ -130,4 +128,11 @@ void Game::clean() {
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	std::cout << "Joc curatat\n";
+}
+
+void Game::addTile(int id, int x, int y) {
+
+	auto& tile(manager.addEntity());
+	tile.addComponent<TileComponent>(x, y, 32, 32, id);
+	
 }

@@ -33,6 +33,8 @@ public:
 	void render();
 	void clean();
 
+	static void addTile(int id, int x, int y);
+
 	bool running() const {
 		return isRunning;
 	}

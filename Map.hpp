@@ -1,23 +1,17 @@
 #pragma once
-
-#include "Game.hpp"
+#include <string>
 
 class Map {
 
 private:
 
-	SDL_FRect src, dest;
-	SDL_Texture* dirt;
-	SDL_Texture* grass;
-	SDL_Texture* water;
-
-	int map[20][25];
+	
 
 public:
 
 	Map();
 	~Map();
 
-	void loadMap(int arr[20][25]);
+	static void loadMap(std::string path, int sizeX, int sizeY);
 	void drawMap();
 };
