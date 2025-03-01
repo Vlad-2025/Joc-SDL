@@ -12,10 +12,23 @@ private:
 	SDL_Texture* texture;
 	SDL_FRect srcRect, destRect;
 
+	bool animated = false;
+	int frames = 0;
+	int speed = 100;	// delay intre frameuri in milisecunde
+
 public:
 
 	SpriteComponent() = default;
 	SpriteComponent(const char* path) {
+
+		setTex(path);
+	}
+
+	SpriteComponent(const char* path, int numberFrames, int animationSpeed) {
+
+		animated = true;
+		frames = numberFrames;
+		speed = animationSpeed;
 
 		setTex(path);
 	}
@@ -43,6 +56,11 @@ public:
 	}
 
 	void update() override {
+
+		if (animated) {
+
+			srcRect.x = srcRect.w * (static_cast<int>(SDL_GetTicks() / speed) % frames);
+		}
 
 		destRect.x = transform->position.x;
 		destRect.y = transform->position.y;

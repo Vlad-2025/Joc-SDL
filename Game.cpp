@@ -17,9 +17,14 @@ Manager manager;
 auto& player(manager.addEntity());
 auto& wall(manager.addEntity());
 
-auto& tile0(manager.addEntity());
-auto& tile1(manager.addEntity());
-auto& tile2(manager.addEntity());
+enum groupLabels : std::size_t {
+
+	groupMap,
+	groupPlayers,
+	groupEnemies,
+	groupColliders
+	//...32 grupuri posibile in total
+};
 
 Game::Game() {
 	renderer = nullptr;
@@ -71,13 +76,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	Map::loadMap("assets/p16x16.txt", 32, 32);
 
 	player.addComponent<TransformComponent>(1);
-	player.addComponent<SpriteComponent>("assets/retep1.png");
+	player.addComponent<SpriteComponent>("assets/player_idle1.png", 4, 500);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
+	player.addGroup(groupPlayers);
 
 	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
 	wall.addComponent<SpriteComponent>("assets/pamant100.png");
 	wall.addComponent<ColliderComponent>("wall");
+	wall.addGroup(groupMap);
 }
 
 void Game::handleEvents() {
@@ -111,13 +118,20 @@ void Game::update() {
 	}
 }
 
+//	listele prin care trecem pentru a randa obiectele
+auto& tiles(manager.getGroup(groupMap));
+auto& players(manager.getGroup(groupPlayers));
+auto& enemies(manager.getGroup(groupEnemies));
+
 void Game::render() {
 
 	SDL_RenderClear(renderer);
 
-	//map->drawMap();
+	//	manager.draw(); -> randa obiectele in ordinea creeari lor
 
-	manager.draw();
+	for (auto& t : tiles)	t->draw();
+	for (auto& p : players) p->draw();
+	for (auto& e : enemies) e->draw();
 
 	SDL_RenderPresent(renderer);
 }
@@ -135,5 +149,5 @@ void Game::addTile(int id, int x, int y) {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, 32, 32, id);
 
-
+	tile.addGroup(groupMap);
 }

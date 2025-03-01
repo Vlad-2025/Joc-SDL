@@ -26,7 +26,6 @@ void Map::loadMap(std::string path, int sizeX, int sizeY) {
 		for (int col = 0; col < sizeX; col++){
 			mapFile.get(tile);
 			Game::addTile(atoi(&tile), col * 32, row * 32);
-			std::cout << tile << " ";
 			mapFile.ignore();
 		}
 		//mapFile.ignore();
