@@ -68,7 +68,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	map = new Map();
 
-	Map::loadMap("assets/p16x16.map", 32, 32);
+	Map::loadMap("assets/p16x16.txt", 32, 32);
 
 	player.addComponent<TransformComponent>(1);
 	player.addComponent<SpriteComponent>("assets/retep1.png");
