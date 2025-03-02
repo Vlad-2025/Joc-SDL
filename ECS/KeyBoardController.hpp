@@ -88,6 +88,10 @@ public:
 				sprite->play("Idle");
 				break;
 
+			case SDLK_ESCAPE:
+				Game::isRunning = false;
+				break;
+
 			default:
 				break;
 			}

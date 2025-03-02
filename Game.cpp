@@ -7,17 +7,20 @@
 #include "Collision.hpp"
 
 Map* map;
+Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
+SDL_Rect Game::camera = {0,0, 800, 640};
+
 std::vector<ColliderComponent*> Game::colliders;
+bool Game::isRunning = false;
 
-Manager manager;
 auto& player(manager.addEntity());
-auto& wall(manager.addEntity());
+//auto& wall(manager.addEntity());
 
-const char* mapFile = "assets/terrain_ss.png";
+const char* mapFile = "assets/terrain_ss1.png";
 
 enum groupLabels : std::size_t {
 
@@ -27,6 +30,12 @@ enum groupLabels : std::size_t {
 	groupColliders
 	//...32 grupuri posibile in total
 };
+
+//	listele prin care trecem pentru a randa obiectele
+auto& tiles(manager.getGroup(groupMap));
+auto& players(manager.getGroup(groupPlayers));
+auto& enemies(manager.getGroup(groupEnemies));
+
 
 Game::Game() {
 	renderer = nullptr;
@@ -77,7 +86,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	Map::loadMap("assets/map.map", 25, 20);
 
-	player.addComponent<TransformComponent>(1);
+	player.addComponent<TransformComponent>(2);
 	player.addComponent<SpriteComponent>("assets/player_anims1.png", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
@@ -100,25 +109,41 @@ void Game::handleEvents() {
 
 void Game::update() {
 
-	/*cnt++;
-	std::cout << cnt << "\t";
-	if (!(cnt % 10))
-		std::cout << std::endl;*/
+	///*cnt++;
+	//std::cout << cnt << "\t";
+	//if (!(cnt % 10))
+	//	std::cout << std::endl;*/
+
+	//manager.refresh();
+	//manager.update();
+
+	//Vector2D pVelocity = player.getComponent<TransformComponent>().velocity;
+	//int pSpeed = player.getComponent<TransformComponent>().speed;
+
+	//	verificare coliziuni dintre player si obiecte de care se poate lovi dintr-un vector
+	//for(auto& i : colliders){
+	//	Collision::AABB(player.getComponent<ColliderComponent>(), *i);
+	//}
+
+	//for (auto t : tiles) {
+
+	//	t->getComponent<TileComponent>().destRect.x += -(pVelocity.x * pSpeed);
+	//	t->getComponent<TileComponent>().destRect.y += -(pVelocity.y * pSpeed);
+	//
 
 	manager.refresh();
 	manager.update();
 
+	camera.x = player.getComponent<TransformComponent>().position.x - 400;
+	camera.y = player.getComponent<TransformComponent>().position.y - 320;
 
-	//	verificare coliziuni dintre player si obiecte de care se poate lovi dintr-un vector
-	for(auto& i : colliders){
-		Collision::AABB(player.getComponent<ColliderComponent>(), *i);
-	}
+	if (camera.x < 0) camera.x = 0;
+	if (camera.y < 0) camera.y = 0;
+
+	if (camera.x > camera.w) camera.x = camera.w;
+	if (camera.y > camera.h) camera.y = camera.h;
 }
 
-//	listele prin care trecem pentru a randa obiectele
-auto& tiles(manager.getGroup(groupMap));
-auto& players(manager.getGroup(groupPlayers));
-auto& enemies(manager.getGroup(groupEnemies));
 
 void Game::render() {
 
@@ -141,10 +166,9 @@ void Game::clean() {
 	std::cout << "Joc curatat\n";
 }
 
-void Game::addTile(float srcX, float srcY, float xpos, float ypos) {
+void Game::addTile(int srcX, int srcY, float xpos, float ypos) {
 
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, mapFile);
-
 	tile.addGroup(groupMap);
 }

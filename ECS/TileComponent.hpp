@@ -11,6 +11,7 @@ public:
 
 	SDL_Texture* texture;
 	SDL_FRect srcRect, destRect;
+	Vector2D position;
 
 	TileComponent() = default;
 
@@ -30,14 +31,24 @@ public:
 		/*	
 			PROBLEMA: daca vreau sa fac destRect de 64x64, si schimb in "Map.cpp" ce este necesar,
 			apare o margine de ~1pixel la fiecare tile, presupun ca e datorita diferentei intre SDL_FRect si SDL_Rect
+			* CORECTIE: e de la imaginea descarcata de undeva, daca ii dau export din photoshop cu scale de 200%, arata bine
 		*/		
 		srcRect.x = srcX;
 		srcRect.y = srcY;
-		srcRect.w = srcRect.h = 32;
+		srcRect.w = srcRect.h = 64;
 		
 		destRect.x = xpos;
 		destRect.y = ypos;
-		destRect.w = destRect.h = 32;
+		destRect.w = destRect.h = 64;
+
+		position.x = xpos;
+		position.y = ypos;
+	}
+
+	void update() override {
+
+		destRect.x = position.x - Game::camera.x;
+		destRect.y = position.y - Game::camera.y;
 	}
 
 	void draw() override {

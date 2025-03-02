@@ -84,8 +84,8 @@ public:
 
 		srcRect.y = static_cast<float>(animIndex * transform->height);
 
-		destRect.x = transform->position.x;
-		destRect.y = transform->position.y;
+		destRect.x = transform->position.x - Game::camera.x;
+		destRect.y = transform->position.y - Game::camera.y;
 
 		//	poate fi folosit static_cast<>
 

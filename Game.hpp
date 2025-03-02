@@ -17,7 +17,6 @@ class Game {
 
 private:
 
-	bool isRunning;
 	SDL_Window* window;
 	int cnt;
 
@@ -33,7 +32,7 @@ public:
 	void render();
 	void clean();
 
-	static void addTile(float srcX, float srcY, float xpos, float ypos);
+	static void addTile(int srcX, int srcY, float xpos, float ypos);
 
 	bool running() const {
 		return isRunning;
@@ -41,5 +40,7 @@ public:
 
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
+	static SDL_Rect camera;
 	static std::vector<ColliderComponent*> colliders;
+	static bool isRunning;
 };
