@@ -1,8 +1,6 @@
 #pragma once
 
 #include "ECS.hpp"
-#include "TransformComponent.hpp"
-#include "SpriteComponent.hpp"
 #include "SDL3/SDL.h"
 
 class TileComponent : public Component {
@@ -11,48 +9,39 @@ private:
 
 public:
 
-	TransformComponent* transform;
-	SpriteComponent* sprite;
-
-	SDL_Rect tileRect;
-	int tileID;
-	const char* path;
+	SDL_Texture* texture;
+	SDL_FRect srcRect, destRect;
 
 	TileComponent() = default;
 
-	TileComponent(int x, int y, int w, int h, int id) {
-
-		tileRect.x = x;
-		tileRect.y = y;
-		tileRect.w = w;
-		tileRect.h = h;
-		tileID = id;
-
-		switch (tileID)
-		{
-		case 0:
-			path = "assets/apa100.png";
-			break;
-		case 1:
-			path = "assets/pamant100.png";
-			break;
-		case 2:
-			path = "assets/iarba100.png";
-			break;
-
-		default:
-			break;
-		}
+	~TileComponent() {
+		SDL_DestroyTexture(texture);
 	}
 
-	void init() override {
+	TileComponent(float srcX, float srcY, float xpos, float ypos, const char* path) {
 
-		entity->addComponent<TransformComponent>(1.0*tileRect.x, 1.0 * tileRect.y, tileRect.w, tileRect.h, 1);
+		texture = TextureManager::LoadTexture(path);
+		if (texture == nullptr) {
+			std::cout << "\nCrapa atribuire \"TextureManager::LoadTexture(path)\" la \"texture\" in \"TileComponent.hpp\"!\n";
+		}
 
-		transform = &entity->getComponent<TransformComponent>();
+		//	daca modific scale-ul, trebuie si in "Map.cpp"
 
-		entity->addComponent<SpriteComponent>(path);
+		/*	
+			PROBLEMA: daca vreau sa fac destRect de 64x64, si schimb in "Map.cpp" ce este necesar,
+			apare o margine de ~1pixel la fiecare tile, presupun ca e datorita diferentei intre SDL_FRect si SDL_Rect
+		*/		
+		srcRect.x = srcX;
+		srcRect.y = srcY;
+		srcRect.w = srcRect.h = 32;
+		
+		destRect.x = xpos;
+		destRect.y = ypos;
+		destRect.w = destRect.h = 32;
+	}
 
-		sprite = &entity->getComponent<SpriteComponent>();
+	void draw() override {
+
+		TextureManager::Draw(texture, srcRect, destRect, SDL_FLIP_NONE);
 	}
 };

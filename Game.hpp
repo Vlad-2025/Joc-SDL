@@ -33,7 +33,7 @@ public:
 	void render();
 	void clean();
 
-	static void addTile(int id, int x, int y);
+	static void addTile(float srcX, float srcY, float xpos, float ypos);
 
 	bool running() const {
 		return isRunning;
