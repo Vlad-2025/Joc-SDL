@@ -19,7 +19,7 @@ SDL_Texture* TextureManager::LoadTexture(const char* texture) {
 	return tex;
 }
 
-void TextureManager::Draw(SDL_Texture* tex, SDL_FRect src, SDL_FRect dest) {
+void TextureManager::Draw(SDL_Texture* tex, SDL_FRect src, SDL_FRect dest, SDL_FlipMode flip) {
 
-	SDL_RenderTexture(Game::renderer, tex, &src, &dest);
+	SDL_RenderTextureRotated(Game::renderer, tex, &src, &dest, NULL, NULL, flip);
 }
