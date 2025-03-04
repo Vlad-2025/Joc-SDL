@@ -19,19 +19,20 @@ public:
 
 		transform = &entity->getComponent<TransformComponent>();
 		if (transform == nullptr) {
-			std::cout << "Crapa atribuire componenta \"TransformComponent\" la \"transform\" in \"init()\" din \"KeyBoardController\"!\n";
+			std::cout << "Atribuire invalida componenta \"TransformComponent\" la \"transform\" in \"init()\" din \"KeyBoardController\"!\n";
 			return;
 		}
 		sprite = &entity->getComponent<SpriteComponent>();
 		if (sprite == nullptr) {
-			std::cout << "Crapa atribuire componenta \"SpriteComponent\" la \"sprite\" in \"init()\" din \"KeyBoardController\"!\n";
+			std::cout << "Atribuire invalida componenta \"SpriteComponent\" la \"sprite\" in \"init()\" din \"KeyBoardController\"!\n";
 			return;
 		}
 	}
 
 	void update() override {
 
-		// trebuie schimbata tehnica de input la scancode
+		// TODO: trebuie schimbata tehnica de input la scancode
+		// TODO: trebuie schimbata logica de miscare
 
 		if (Game::event.type == SDL_EVENT_KEY_DOWN) {
 			

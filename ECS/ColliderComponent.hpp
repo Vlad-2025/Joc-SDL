@@ -13,11 +13,12 @@ private:
 public:
 
 	SDL_FRect collider;
-	std::string tag;
+	std::string tag;	// pentru a deosebi obiectele cu componenta collider intre ele
 
 	TransformComponent* transform;
 
 	ColliderComponent(std::string _tag) {
+		collider = { 0,0,0,0 };
 		transform = nullptr;
 		tag = _tag;
 	}

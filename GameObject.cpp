@@ -26,16 +26,18 @@ GameObject::~GameObject() {
 void GameObject::update() {
 
 	// problema blurare la upscale de la 32x32 pixeli la 64x64 pixeli
-	// daca fac srcRect de 832x832 pixeli si downscale la 64x64 pixeli se vede bine,
-	//	dar ocupa mai mult spatiu si nu inteleg cum pot sa fac upscaleu corect
+	// daca fac srcRect de 832x832 pixeli si downscale la 64x64 pixeli se vede corect,
+	// dar ocupa mai mult spatiu si nu am gasit alta optiune pentru upscale
 
-	srcRect.h = 832;
-	srcRect.w = 832;
+	srcRect.h = 64;
+	srcRect.w = 64;
 	srcRect.x = 0;
 	srcRect.y = 0;
 
+	// pentru texturi de 32x32 cu upscale la 64x64, dar nu se vad bine (momentan)
 	destRect.h = 32 * 2;
 	destRect.w = 32 * 2;
+
 	destRect.x = xpos;
 	destRect.y = ypos;
 

@@ -1,5 +1,7 @@
 #include "Vector2D.hpp"
 
+// folosit pentru pozitionarea unui obiect (actor) in cadrul nivelului
+
 Vector2D::Vector2D() {
 
 	x = 0.0f;

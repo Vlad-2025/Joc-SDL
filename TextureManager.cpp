@@ -4,13 +4,13 @@ SDL_Texture* TextureManager::LoadTexture(const char* texture) {
 
 	SDL_Surface* tempSurface = IMG_Load(texture);
 	if (!tempSurface) {
-		std::cout << "Crapa creare \"tempSurface\" in \"TextureManager.cpp\"\n";
+		std::cout << "Atribuire invalida \"IMG_Load(texture)\" la \"tempSurface\" in \"TextureManager.cpp\"\n";
 		return nullptr;
 	}
 
 	SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::renderer, tempSurface);
 	if (!tex) {
-		std::cout << "Crapa creare \"tex\" in \"TextureManager.cpp\"\n";
+		std::cout << "Atribuire invalida \"SDL_CreateTextureFromSurface(...)\" la \"tex\" in \"TextureManager.cpp\"\n";
 		return nullptr;
 	}
 

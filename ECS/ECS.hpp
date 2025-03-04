@@ -9,17 +9,19 @@
 
 /*
 
-	trebuie revizuite conventiile de notare
+	TODO: trebuie revizuite conventiile de notare
+	TODO: trebuie curatat codul
 
 */
 
+// forward declaration
 class Component;
 class Entity;
 class Manager;
 
-//	alias pentru std::size_t
-using ComponentID = std::size_t;
-using Group = std::size_t;
+//	aliasuri pentru std::size_t
+using ComponentID	= std::size_t;
+using Group			= std::size_t;
 
 inline ComponentID getNewComponentTypeID(){
 
@@ -34,13 +36,15 @@ template <typename T> inline ComponentID getComponentTypeID() noexcept{
 	return typeID;
 }
 
-constexpr std::size_t maxComponents = 32;
-constexpr std::size_t maxGroups = 32;
+// pentru initializare la compile-time + are constructor
+constexpr std::size_t maxComponents	= 32;
+constexpr std::size_t maxGroups		= 32;
 
-using componentBitSet = std::bitset<maxComponents>;
-using GroupBitSet = std::bitset<maxGroups>;
 
-using componentArray = std::array<Component*, maxComponents>;
+using componentBitSet	= std::bitset<maxComponents>;
+using GroupBitSet		= std::bitset<maxGroups>;
+
+using componentArray	= std::array<Component*, maxComponents>;
 
 class Component {
 
@@ -49,6 +53,10 @@ private:
 public:
 
 	Entity* entity;
+
+	Component() {
+		entity = nullptr;
+	}
 
 	virtual void init() {}
 	virtual void update() {}
@@ -64,7 +72,7 @@ private:
 	bool active = true;
 	std::vector<std::unique_ptr<Component>> components;
 
-	componentArray componentArray;
+	componentArray componentArray = {};
 	componentBitSet componentBitSet;
 	GroupBitSet groupBitSet;
 

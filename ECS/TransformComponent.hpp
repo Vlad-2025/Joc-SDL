@@ -24,6 +24,7 @@ public:
 
 	TransformComponent(int _scale) {
 
+		// jumatatea ecranului, pentru centrare camera asupra personajului
 		position.x = 400;
 		position.y = 320;
 		scale = _scale;

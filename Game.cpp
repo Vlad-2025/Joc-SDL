@@ -58,36 +58,36 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 
-		std::cout << "Subsisteme VIDEO initializate\n";
+		std::cout << "Subsisteme \"VIDEO\" initializate...\"\n";
 
 		window = SDL_CreateWindow(title, width, height, flags);
 		if (!window) {
 
-			std::cout << "Crapa Windowul\n";
+			std::cout << "Initializare \"window\" esuata!\n";
 			return;
 		}
-		std::cout << "Merge Windowul\n";
+		std::cout << "Initializat \"Window\"...\n";
 
 		renderer = SDL_CreateRenderer(window, NULL);
 		if (!renderer) {
 			
-			std::cout << "Crapa rendererul\n";
+			std::cout << "Initializare \"renderer\" esuata!\n";
 			return;
 		}
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		std::cout << "Merge rendererul\n";
+		std::cout << "Initializat \"Renderer\"...\n";
 
 		isRunning = true;
 	}
 	else
-		std::cout << "Crapa initul\n";
+		std::cout << "Initializare subsisteme \"VIDEO\" esuata!\n";
 
 	map = new Map();
 
 	Map::loadMap("assets/map.map", 25, 20);
 
 	player.addComponent<TransformComponent>(2);
-	player.addComponent<SpriteComponent>("assets/player_anims1.png", true);
+	player.addComponent<SpriteComponent>("assets/player_anims1.png", false);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
@@ -131,12 +131,16 @@ void Game::update() {
 	//	t->getComponent<TileComponent>().destRect.y += -(pVelocity.y * pSpeed);
 	//
 
+
+	// prima data actualizam obiectele care trebuie incarcate si dupa le incarcam
 	manager.refresh();
 	manager.update();
 
+	// pozitionare personaj in mijlocul ecranului <> centrare camera asupra personajului
 	camera.x = player.getComponent<TransformComponent>().position.x - 400;
 	camera.y = player.getComponent<TransformComponent>().position.y - 320;
 
+	// pentru marginile hartii, ca sa nu le depaseasca camera
 	if (camera.x < 0) camera.x = 0;
 	if (camera.y < 0) camera.y = 0;
 
@@ -149,7 +153,7 @@ void Game::render() {
 
 	SDL_RenderClear(renderer);
 
-	//	manager.draw(); -> randa obiectele in ordinea creeari lor
+	//	manager.draw(); -> randa obiectele in ordinea formarii lor
 
 	for (auto& t : tiles)	t->draw();
 	for (auto& p : players) p->draw();
@@ -158,17 +162,17 @@ void Game::render() {
 	SDL_RenderPresent(renderer);
 }
 
+void Game::addTile(int srcX, int srcY, float xpos, float ypos) {
+
+	auto& tile(manager.addEntity());
+	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, mapFile);
+	tile.addGroup(groupMap);
+}
+
 void Game::clean() {
 
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	std::cout << "Joc curatat\n";
-}
-
-void Game::addTile(int srcX, int srcY, float xpos, float ypos) {
-
-	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, mapFile);
-	tile.addGroup(groupMap);
 }

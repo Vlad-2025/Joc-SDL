@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]){
 	
 		- trebuie gasita o solutie definitiva pentru frame-rate si inconsistentele la diferite frame-rateuri
 		- solutia implementata este buna pentru consistenta intre frame-rateuri diferite, dar la valori mai mici 
-			de 120fps se vede tearing sau ce o fi
+			de 120fps apare screen-tearing
 	
 	*/
 
@@ -28,6 +28,7 @@ int main(int argc, const char * argv[]){
 	while (game->running()) {
 
 		/*
+			Algoritmul de baza
 		
 			deltaTime = CurrentTime() - OldTime;
 			oldTime = CurrentTime();
@@ -51,7 +52,8 @@ int main(int argc, const char * argv[]){
 		accumulator += frameTime.count();
 
 		while (accumulator >= dt) {
-			// nu stiu daca merge handleEvents() aici
+			// TODO: stabilit daca handleEvents() trebuie apelat in interiorul while-ului 
+			//		 sau inainte
 			game->handleEvents();
 			game->update();
 			accumulator -= dt;

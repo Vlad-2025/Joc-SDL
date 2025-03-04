@@ -15,17 +15,20 @@ private:
 	SDL_FRect srcRect, destRect;
 
 	bool animated = false;
-	int frames = 0;
-	int speed = 100;	// delay intre frameuri in milisecunde
+	int frames = 0;		// numar frame-uri
+	int speed = 100;	// delay intre frame-uri in milisecunde
 
 public:
 
-	int animIndex = 0;
+	int animIndex = 0;	// care element din textura cu animatii sa afiseze
 	std::map<const char*, Animation> animations;
-	// ca sa nu mai faca moonwalk
+
+	// ca sa nu mai faca moonwalk -> sa roteasca in jurul axei verticale sprite-ul
+	// in functie de directia de deplasare
 	SDL_FlipMode spriteFlip = SDL_FLIP_NONE;
 
 	SpriteComponent() = default;
+
 	SpriteComponent(const char* path) {
 
 		transform = nullptr;
@@ -57,7 +60,7 @@ public:
 
 		texture = TextureManager::LoadTexture(path);
 		if (texture == nullptr) {
-			std::cout << "Crapa \"setTex()\" in \"SpriteComponent.hpp\"\n!";
+			std::cout << "Atribuire invalida \"setTex(path)\" in \"SpriteComponent.hpp\"\n!";
 			return;
 		}
 		
@@ -68,8 +71,6 @@ public:
 		transform = &entity->getComponent<TransformComponent>();
 
 		srcRect.x = srcRect.y = 0;
-		//srcRect.w = srcRect.h = 832;	 TERBUIE NEAPARAT REPARAT
-		//destRect.w = destRect.h = 64;
 
 		srcRect.w = 1.0f * transform->width;
 		srcRect.h = 1.0f * transform->height;
@@ -78,7 +79,7 @@ public:
 	void update() override {
 
 		if (animated) {
-
+			// TODO: trebuie revizuit procesul de casting de la int la float si invers
 			srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
 		}
 
@@ -99,9 +100,10 @@ public:
 	}
 
 	void play(const char* animName) {
+		// pentru a anima o textura
 
 		if (animName == nullptr) {
-			std::cout << "Crapa \"play()\" in \"SpriteComponent.hpp\"\n!";
+			std::cout << "Atribuire invalida \"play()\" in \"SpriteComponent.hpp\"\n!";
 			return;
 		}
 

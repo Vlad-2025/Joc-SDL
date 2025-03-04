@@ -2,22 +2,16 @@
 #include "Game.hpp"
 #include <fstream>
 
-Map::Map() {
+Map::Map() {}
 
-	
-}
-
-Map::~Map() {
-
-	
-}
+Map::~Map() {}
 
 void Map::loadMap(std::string path, int sizeX, int sizeY) {
 
-	char c;
+	char c;	// un caracter dintr-un fisier citit
 	std::fstream mapFile;
 	if (path.empty()) {
-		std::cout << "Crapa pasare \"path\" in \"Map.cpp\"!\n";
+		std::cout << "Deschidere fisier invalida \"path\" in \"Map.cpp\"!\n";
 		return;
 	}
 	mapFile.open(path);

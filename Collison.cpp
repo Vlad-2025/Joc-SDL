@@ -3,6 +3,8 @@
 #include "Collision.hpp"
 #include "ECS/ColliderComponent.hpp"
 
+// implementare Axis-Aligned Bounding Box
+
 bool Collision::AABB(const SDL_FRect& recA, const SDL_FRect& recB) {
 
 	return
