@@ -11,7 +11,7 @@ SDL a parut solutia ideala pentru ce doream sa fac, intrucat ofera o interfata i
 
 ## Ce fel de implementari are proiectul?
 
-Momentan se afla in dezoltare, dar printre elementele cele mai interesante se numara:
+Momentan se afla in dezvoltare, dar printre elementele cele mai interesante se numara:
 - **Sistem de Componente ale Entitatilor**: (ECS - Entity Component System), care are scopul de a generaliza modalitatea de atribuire a componentelor (cum ar fi texturile, transformarile sau coliziunile) la actori (elemente din joc), pentru a accelera procesul de introducere al entitatilor in joc;
 - **Animatii**: putem anima o textura folosind o imagine de tip .PNG care contine toate cadrele animatiei respective, si le parcurgem folosind diferite moduri, in functie de efectul dorit (exista animatii 'Idle'(pentru cand actorul sta pe loc) si animatii 'Walk'(pentru cand actorul se deplaseaza));
 - **Harta**: putem crea o harta (sau nivel) prin intermediul unui fisier care contine informatii asupra tipului de 'tile' (numere de 2 cifre) obtinut prin utilizarea unui program dedicat 'pixel-art'-ului, impreuna cu un alt fisier de tip .PNG, care contine tile-urile in sine. Programul extrage tipul de tile dorit din textura in functie de informatia aflata in fisierul .map;
